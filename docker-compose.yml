@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  product_category_module:
+    env_file:
+      - "../.env"
+    build:
+      context: .
+    container_name: product_category_module
+    restart: always
+    ports:
+      - "9082:8080"
+    environment:
+      MODULE_GROUP_ID: PRODUCT_CATEGORY_GROUP_ID
+#    deploy:
+#      mode: replicated
+#      replicas: 2
+
