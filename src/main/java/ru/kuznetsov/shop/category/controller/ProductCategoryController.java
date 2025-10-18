@@ -3,8 +3,8 @@ package ru.kuznetsov.shop.category.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.kuznetsov.shop.data.dto.ProductCategoryDto;
 import ru.kuznetsov.shop.data.service.ProductCategoryService;
+import ru.kuznetsov.shop.represent.dto.ProductCategoryDto;
 
 import java.util.ArrayList;
 import java.util.List;
