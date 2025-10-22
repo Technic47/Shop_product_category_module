@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kuznetsov.shop.data.service.ProductCategoryService;
 import ru.kuznetsov.shop.represent.dto.ProductCategoryDto;
+import ru.kuznetsov.shop.represent.dto.StoreDto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -33,8 +35,15 @@ public class ProductCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductCategoryDto> createStore(@RequestBody ProductCategoryDto storeDto) {
+    public ResponseEntity<ProductCategoryDto> create(@RequestBody ProductCategoryDto storeDto) {
         return ResponseEntity.ok(productCategoryService.add(storeDto));
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<List<ProductCategoryDto>> createBatch(@RequestBody Collection<ProductCategoryDto> dtoCollection) {
+        return ResponseEntity.ok(dtoCollection.stream()
+                .map(productCategoryService::add)
+                .toList());
     }
 
     @DeleteMapping("/{id}")
