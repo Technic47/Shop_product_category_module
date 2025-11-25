@@ -12,6 +12,7 @@ services:
       - "9082:8080"
     environment:
       MODULE_GROUP_ID: PRODUCT_CATEGORY_GROUP_ID
+      SERVICE_PORT: 9082
 #    deploy:
 #      mode: replicated
 #      replicas: 2
