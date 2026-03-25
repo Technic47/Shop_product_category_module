@@ -3,6 +3,7 @@ package ru.kuznetsov.shop.category.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.kuznetsov.shop.category.api.ProductCategoryControllerApi;
 import ru.kuznetsov.shop.data.service.ProductCategoryService;
 import ru.kuznetsov.shop.represent.dto.ProductCategoryDto;
 
@@ -13,17 +14,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/product-category")
 @RequiredArgsConstructor
-public class ProductCategoryController {
+public class ProductCategoryController implements ProductCategoryControllerApi {
 
     private final ProductCategoryService productCategoryService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductCategoryDto> getStoreById(@PathVariable Long id) {
+    public ResponseEntity<ProductCategoryDto> getCategoryById(@PathVariable Long id) {
         return ResponseEntity.ok(productCategoryService.findById(id));
     }
 
     @GetMapping()
-    public ResponseEntity<List<ProductCategoryDto>> getAllStores(
+    public ResponseEntity<List<ProductCategoryDto>> getAllCategories(
             @RequestParam(required = false) String name
     ) {
         List<ProductCategoryDto> result = new ArrayList<>();
@@ -34,8 +35,8 @@ public class ProductCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductCategoryDto> create(@RequestBody ProductCategoryDto storeDto) {
-        return ResponseEntity.ok(productCategoryService.add(storeDto));
+    public ResponseEntity<ProductCategoryDto> create(@RequestBody ProductCategoryDto categoryDto) {
+        return ResponseEntity.ok(productCategoryService.add(categoryDto));
     }
 
     @PostMapping("/batch")
@@ -46,7 +47,7 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteeStore(@PathVariable Long id) {
+    public void deleteCategory(@PathVariable Long id) {
         productCategoryService.deleteById(id);
     }
 }
