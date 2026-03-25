@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kuznetsov.shop.represent.dto.ProductCategoryDto;
-import ru.kuznetsov.shop.represent.dto.StoreDto;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +24,7 @@ public interface ProductCategoryControllerApi {
                     responseCode = "200",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = StoreDto.class)
+                            schema = @Schema(implementation = ProductCategoryDto.class)
                     ),
                     description = "Категория"
             ),
@@ -52,7 +51,7 @@ public interface ProductCategoryControllerApi {
                     responseCode = "200",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = StoreDto[].class)
+                            schema = @Schema(implementation = ProductCategoryDto[].class)
                     ),
                     description = "Список категорий"
             ),
@@ -80,7 +79,7 @@ public interface ProductCategoryControllerApi {
                     responseCode = "200",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = StoreDto.class)
+                            schema = @Schema(implementation = ProductCategoryDto.class)
                     ),
                     description = "Сущность создана"
             ),
@@ -95,7 +94,7 @@ public interface ProductCategoryControllerApi {
     ResponseEntity<ProductCategoryDto> create(
             @Parameter(description = "Модель категории для создания", required = true,
                     schema = @Schema(
-                            implementation = StoreDto.class,
+                            implementation = ProductCategoryDto.class,
                             description = "Категория"
                     ))
             @RequestBody ProductCategoryDto categoryDto);
@@ -106,7 +105,7 @@ public interface ProductCategoryControllerApi {
                     responseCode = "200",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = StoreDto[].class)
+                            schema = @Schema(implementation = ProductCategoryDto[].class)
                     ),
                     description = "Сущность создана"
             ),
@@ -121,7 +120,7 @@ public interface ProductCategoryControllerApi {
     ResponseEntity<List<ProductCategoryDto>> createBatch(
             @Parameter(description = "Модель категории для создания", required = true,
                     schema = @Schema(
-                            implementation = StoreDto[].class,
+                            implementation = ProductCategoryDto[].class,
                             description = "Категория"
                     ))
             @RequestBody Collection<ProductCategoryDto> dtoCollection);
