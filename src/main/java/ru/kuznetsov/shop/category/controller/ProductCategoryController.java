@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 @RestController
 @RequestMapping("/product-category")
 @RequiredArgsConstructor
@@ -20,7 +22,10 @@ public class ProductCategoryController implements ProductCategoryControllerApi {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductCategoryDto> getCategoryById(@PathVariable Long id) {
-        return ResponseEntity.ok(productCategoryService.findById(id));
+        ProductCategoryDto byId = productCategoryService.findById(id);
+        return byId == null ?
+                ResponseEntity.status(NO_CONTENT).build()
+                : ResponseEntity.ok(byId);
     }
 
     @GetMapping()
@@ -28,10 +33,14 @@ public class ProductCategoryController implements ProductCategoryControllerApi {
             @RequestParam(required = false) String name
     ) {
         List<ProductCategoryDto> result = new ArrayList<>();
+
         if (name != null) {
             result.add(productCategoryService.findByName(name));
         } else result.addAll(productCategoryService.findAll());
-        return ResponseEntity.ok(result);
+
+        return result.isEmpty() ?
+                ResponseEntity.status(NO_CONTENT).build()
+                : ResponseEntity.ok(result);
     }
 
     @PostMapping
